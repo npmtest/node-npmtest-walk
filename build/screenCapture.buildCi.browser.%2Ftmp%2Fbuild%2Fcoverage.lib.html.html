@@ -1,0 +1,1129 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-walk/node_modules/walk/lib/walk.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-walk">npmtest-walk (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-walk/node_modules/walk/lib/walk.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">15.49% <small>(22 / 142)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 47)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">3.85% <small>(1 / 26)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">15.49% <small>(22 / 142)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-walk/node_modules/walk/lib/</a> » walk.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Adapted from work by jorge@jorgechamorro.com on 2010-11-25
+(function () {
+  "use strict";
+&nbsp;
+<span class="fstat-no" title="function not covered">  function noop() {</span>}
+&nbsp;
+  var fs = require('fs')
+    , forEachAsync = require('foreachasync').forEachAsync
+    , EventEmitter = require('events').EventEmitter
+    , TypeEmitter = require('./node-type-emitter')
+    , util = require('util')
+    , path = require('path')
+    ;
+&nbsp;
+<span class="fstat-no" title="function not covered">  function appendToDirs(stat) {</span>
+    /*jshint validthis:true*/
+<span class="cstat-no" title="statement not covered">    this.push(stat.name);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered">  function wFilesHandlerWrapper(items) {</span>
+    /*jshint validthis:true*/
+<span class="cstat-no" title="statement not covered">    this._wFilesHandler(noop, items);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered">  function Walker(pathname, options, sync) {</span>
+<span class="cstat-no" title="statement not covered">    EventEmitter.call(this);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    options = options || {};</span>
+<span class="cstat-no" title="statement not covered">    me._wStat = options.followLinks &amp;&amp; 'stat' || 'lstat';</span>
+<span class="cstat-no" title="statement not covered">    me._wStatSync = me._wStat + 'Sync';</span>
+<span class="cstat-no" title="statement not covered">    me._wsync = sync;</span>
+<span class="cstat-no" title="statement not covered">    me._wq = [];</span>
+<span class="cstat-no" title="statement not covered">    me._wqueue = [me._wq];</span>
+<span class="cstat-no" title="statement not covered">    me._wcurpath = undefined;</span>
+<span class="cstat-no" title="statement not covered">    me._wfilters = options.filters || [];</span>
+<span class="cstat-no" title="statement not covered">    me._wfirstrun = true;</span>
+<span class="cstat-no" title="statement not covered">    me._wcurpath = pathname;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (me._wsync) {</span>
+      //console.log('_walkSync');
+<span class="cstat-no" title="statement not covered">      me._wWalk = me._wWalkSync;</span>
+    } else {
+      //console.log('_walkASync');
+<span class="cstat-no" title="statement not covered">      me._wWalk = me._wWalkAsync;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    options.listeners = options.listeners || {};</span>
+<span class="cstat-no" title="statement not covered">    Object.keys(options.listeners).forEach(<span class="fstat-no" title="function not covered">function (event) {</span></span>
+<span class="cstat-no" title="statement not covered">      var callbacks = options.listeners[event]</span>
+        ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if ('function' === typeof callbacks) {</span>
+<span class="cstat-no" title="statement not covered">        callbacks = [callbacks];</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      callbacks.forEach(<span class="fstat-no" title="function not covered">function (callback) {</span></span>
+<span class="cstat-no" title="statement not covered">        me.on(event, callback);</span>
+      });
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered">    me._wWalk();</span>
+  }
+&nbsp;
+  // Inherits must come before prototype additions
+  util.inherits(Walker, EventEmitter);
+&nbsp;
+  Walker.prototype._wLstatHandler = <span class="fstat-no" title="function not covered">function (err, stat) {</span>
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    stat = stat || {};</span>
+<span class="cstat-no" title="statement not covered">    stat.name = me._wcurfile;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (err) {</span>
+<span class="cstat-no" title="statement not covered">      stat.error = err;</span>
+      //me.emit('error', curpath, stat);
+      // TODO v3.0 (don't noop the next if there are listeners)
+<span class="cstat-no" title="statement not covered">      me.emit('nodeError', me._wcurpath, stat, noop);</span>
+<span class="cstat-no" title="statement not covered">      me._wfnodegroups.errors.push(stat);</span>
+<span class="cstat-no" title="statement not covered">      me._wCurFileCallback();</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      TypeEmitter.sortFnodesByType(stat, me._wfnodegroups);</span>
+      // NOTE: wCurFileCallback doesn't need thisness, so this is okay
+<span class="cstat-no" title="statement not covered">      TypeEmitter.emitNodeType(me, me._wcurpath, stat, me._wCurFileCallback, me);</span>
+    }
+  };
+  Walker.prototype._wFilesHandler = <span class="fstat-no" title="function not covered">function (cont, file) {</span>
+<span class="cstat-no" title="statement not covered">    var statPath</span>
+      , me = this
+      ;
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    me._wcurfile = file;</span>
+<span class="cstat-no" title="statement not covered">    me._wCurFileCallback = cont;</span>
+<span class="cstat-no" title="statement not covered">    me.emit('name', me._wcurpath, file, noop);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    statPath = me._wcurpath + path.sep + file;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (!me._wsync) {</span>
+      // TODO how to remove this anony?
+<span class="cstat-no" title="statement not covered">      fs[me._wStat](statPath, <span class="fstat-no" title="function not covered">function (err, stat) {</span></span>
+<span class="cstat-no" title="statement not covered">        me._wLstatHandler(err, stat);</span>
+      });
+<span class="cstat-no" title="statement not covered">      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    try {</span>
+<span class="cstat-no" title="statement not covered">      me._wLstatHandler(null, fs[me._wStatSync](statPath));</span>
+    } catch(e) {
+<span class="cstat-no" title="statement not covered">      me._wLstatHandler(e);</span>
+    }
+  };
+  Walker.prototype._wOnEmitDone = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      , dirs = []
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    me._wfnodegroups.directories.forEach(appendToDirs, dirs);</span>
+<span class="cstat-no" title="statement not covered">    dirs.forEach(me._wJoinPath, me);</span>
+<span class="cstat-no" title="statement not covered">    me._wqueue.push(me._wq = dirs);</span>
+<span class="cstat-no" title="statement not covered">    me._wNext();</span>
+  };
+  Walker.prototype._wPostFilesHandler = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (me._wfnodegroups.errors.length) {</span>
+      // TODO v3.0 (don't noop the next)
+      // .errors is an array of stats with { name: name, error: error }
+<span class="cstat-no" title="statement not covered">      me.emit('errors', me._wcurpath, me._wfnodegroups.errors, noop);</span>
+    }
+    // XXX emitNodeTypes still needs refactor
+<span class="cstat-no" title="statement not covered">    TypeEmitter.emitNodeTypeGroups(me, me._wcurpath, me._wfnodegroups, me._wOnEmitDone, me);</span>
+  };
+  Walker.prototype._wReadFiles = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (!me._wcurfiles || 0 === me._wcurfiles.length) {</span>
+<span class="cstat-no" title="statement not covered">      return me._wNext();</span>
+    }
+&nbsp;
+    // TODO could allow user to selectively stat
+    // and don't stat if there are no stat listeners
+<span class="cstat-no" title="statement not covered">    me.emit('names', me._wcurpath, me._wcurfiles, noop);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (me._wsync) {</span>
+<span class="cstat-no" title="statement not covered">      me._wcurfiles.forEach(wFilesHandlerWrapper, me);</span>
+<span class="cstat-no" title="statement not covered">      me._wPostFilesHandler();</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      forEachAsync(me._wcurfiles, me._wFilesHandler, me).then(me._wPostFilesHandler);</span>
+    }
+  };
+  Walker.prototype._wReaddirHandler = <span class="fstat-no" title="function not covered">function (err, files) {</span>
+<span class="cstat-no" title="statement not covered">    var fnodeGroups = TypeEmitter.createNodeGroups()</span>
+      , me = this
+      , parent
+      , child
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    me._wfnodegroups = fnodeGroups;</span>
+<span class="cstat-no" title="statement not covered">    me._wcurfiles = files;</span>
+&nbsp;
+    // no error, great
+<span class="cstat-no" title="statement not covered">    if (!err) {</span>
+<span class="cstat-no" title="statement not covered">      me._wReadFiles();</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    }
+&nbsp;
+    // TODO path.sep
+<span class="cstat-no" title="statement not covered">    me._wcurpath = me._wcurpath.replace(/\/$/, '');</span>
+&nbsp;
+    // error? not first run? =&gt; directory error
+<span class="cstat-no" title="statement not covered">    if (!me._wfirstrun) {</span>
+      // TODO v3.0 (don't noop the next if there are listeners)
+<span class="cstat-no" title="statement not covered">      me.emit('directoryError', me._wcurpath, { error: err }, noop);</span>
+      // TODO v3.0
+      //me.emit('directoryError', me._wcurpath.replace(/^(.*)\/.*$/, '$1'), { name: me._wcurpath.replace(/^.*\/(.*)/, '$1'), error: err }, noop);
+<span class="cstat-no" title="statement not covered">      me._wReadFiles();</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    }
+&nbsp;
+    // error? first run? =&gt; maybe a file, maybe a true error
+<span class="cstat-no" title="statement not covered">    me._wfirstrun = false;</span>
+&nbsp;
+    // readdir failed (might be a file), try a stat on the parent
+<span class="cstat-no" title="statement not covered">    parent = me._wcurpath.replace(/^(.*)\/.*$/, '$1');</span>
+<span class="cstat-no" title="statement not covered">    fs[me._wStat](parent, <span class="fstat-no" title="function not covered">function (e, stat) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (stat) {</span>
+        // success
+        // now try stat on this as a child of the parent directory
+<span class="cstat-no" title="statement not covered">        child = me._wcurpath.replace(/^.*\/(.*)$/, '$1');</span>
+<span class="cstat-no" title="statement not covered">        me._wcurfiles = [child];</span>
+<span class="cstat-no" title="statement not covered">        me._wcurpath = parent;</span>
+      } else {
+        // TODO v3.0
+        //me.emit('directoryError', me._wcurpath.replace(/^(.*)\/.*$/, '$1'), { name: me._wcurpath.replace(/^.*\/(.*)/, '$1'), error: err }, noop);
+        // TODO v3.0 (don't noop the next)
+        // the original readdir error, not the parent stat error
+<span class="cstat-no" title="statement not covered">        me.emit('nodeError', me._wcurpath, { error: err }, noop);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      me._wReadFiles();</span>
+    });
+  };
+  Walker.prototype._wFilter = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      , exclude
+      ;
+&nbsp;
+    // Stop directories that contain filter keywords
+    // from continuing through the walk process
+<span class="cstat-no" title="statement not covered">    exclude = me._wfilters.some(<span class="fstat-no" title="function not covered">function (filter) {</span></span>
+<span class="cstat-no" title="statement not covered">      if (me._wcurpath.match(filter)) {</span>
+<span class="cstat-no" title="statement not covered">        return true;</span>
+      }
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return exclude;</span>
+  };
+  Walker.prototype._wWalkSync = <span class="fstat-no" title="function not covered">function () {</span>
+    //console.log('walkSync');
+<span class="cstat-no" title="statement not covered">    var err</span>
+      , files
+      , me = this
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    try {</span>
+<span class="cstat-no" title="statement not covered">      files = fs.readdirSync(me._wcurpath);</span>
+    } catch(e) {
+<span class="cstat-no" title="statement not covered">      err = e;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    me._wReaddirHandler(err, files);</span>
+  };
+  Walker.prototype._wWalkAsync = <span class="fstat-no" title="function not covered">function () {</span>
+    //console.log('walkAsync');
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      ;
+&nbsp;
+    // TODO how to remove this anony?
+<span class="cstat-no" title="statement not covered">    fs.readdir(me._wcurpath, <span class="fstat-no" title="function not covered">function (err, files) {</span></span>
+<span class="cstat-no" title="statement not covered">      me._wReaddirHandler(err, files);</span>
+    });
+  };
+  Walker.prototype._wNext = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (me._paused) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    }
+<span class="cstat-no" title="statement not covered">    if (me._wq.length) {</span>
+<span class="cstat-no" title="statement not covered">      me._wcurpath = me._wq.pop();</span>
+<span class="cstat-no" title="statement not covered">      while (me._wq.length &amp;&amp; me._wFilter()) {</span>
+<span class="cstat-no" title="statement not covered">        me._wcurpath = me._wq.pop();</span>
+      }
+<span class="cstat-no" title="statement not covered">      if (me._wcurpath &amp;&amp; !me._wFilter()) {</span>
+<span class="cstat-no" title="statement not covered">        me._wWalk();</span>
+      } else {
+<span class="cstat-no" title="statement not covered">        me._wNext();</span>
+      }
+<span class="cstat-no" title="statement not covered">      return;</span>
+    }
+<span class="cstat-no" title="statement not covered">    me._wqueue.length -= 1;</span>
+<span class="cstat-no" title="statement not covered">    if (me._wqueue.length) {</span>
+<span class="cstat-no" title="statement not covered">      me._wq = me._wqueue[me._wqueue.length - 1];</span>
+<span class="cstat-no" title="statement not covered">      return me._wNext();</span>
+    }
+&nbsp;
+    // To not break compatibility
+    //process.nextTick(function () {
+<span class="cstat-no" title="statement not covered">      me.emit('end');</span>
+    //});
+  };
+  Walker.prototype._wJoinPath = <span class="fstat-no" title="function not covered">function (v, i, o) {</span>
+<span class="cstat-no" title="statement not covered">    var me = this</span>
+      ;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    o[i] = [me._wcurpath, path.sep, v].join('');</span>
+  };
+  Walker.prototype.pause = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    this._paused = true;</span>
+  };
+  Walker.prototype.resume = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    this._paused = false;</span>
+<span class="cstat-no" title="statement not covered">    this._wNext();</span>
+  };
+&nbsp;
+  exports.walk = <span class="fstat-no" title="function not covered">function (path, opts) {</span>
+<span class="cstat-no" title="statement not covered">    return new Walker(path, opts, false);</span>
+  };
+&nbsp;
+  exports.walkSync = <span class="fstat-no" title="function not covered">function (path, opts) {</span>
+<span class="cstat-no" title="statement not covered">    return new Walker(path, opts, true);</span>
+  };
+}());
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 22 2017 15:34:59 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
